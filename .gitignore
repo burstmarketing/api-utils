@@ -1,3 +1,8 @@
+# Local Ignores
+config.ini
+pickles/*
+
+## Github Defaults for python projects
 *.py[cod]
 
 # C extensions
