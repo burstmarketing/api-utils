@@ -1,4 +1,19 @@
-api-utils
-=========
+* Passwords Configs etc
+Requires a validly formatted config.ini in the root directory, please use the following format.
+#+BEGIN_EXAMPLE
+[Assembla]
+build_username=BUILD_USER_USERNAME
+build_password=BUILD_USER_PASSWORD
+X-Api-Key=API_KEY
+X-Api-Secret=API_SECRET
 
-api-utils
+[TrafficLive]
+username = TRAFFIC_USERNAME
+api_token = TRAFFIC_API_TOKEN
+#+END_EXAMPLE
++ BUILD_USER_USERNAME :: The username of an administrator who has access to all portfolio sites
++ BUILD_USER_PASSOWRD :: Above user's password
++ API_KEY :: Key generated through assembla's v1 Oauth system by logging into assembla and going to =Profile > API applications & sessions= and creating a new =Application=
++ API_SECRET :: Will be generated and available through the same process as the API_KEY
++ TRAFFIC_USERNAME :: Your traffic-live username
++ TRAFFIC_API_TOKEN :: Generated through the administration panel in traffic live for your user
