@@ -24,6 +24,13 @@ password = config.get("Assembla", "build_password")
 
 
 def scrape_and_pickle(space_ids):
+    """Run a scrape of all content for all space id's returned by get_space_ids(). This
+    will download all content from the API not including ticket comments, or actual documents
+    (see Assembla_space.load_all()). There must be a folder "pickles" in the current working
+    directory which will receive filnames in the format [SPACE_ID].pickle. NOTE: this function 
+    outputs total time to load/pickle each space and takes ~20 to 30 minutes to run. For 
+    performance reasons it is best to run this on a WIRED connection.
+    """
     for id in space_ids:
         print("Scraping %s " % (id), end='')
         sys.stdout.flush()
@@ -60,6 +67,7 @@ def pickled_spaces():
 ##
 
 def prefix_spaces_for_transition():
+    """One off function to update spaces with [To Traffic] and [To Exit] prefixes"""
     for id in get_space_ids():
         space = get_space(id)
         if space.id in to_traffic.values():
@@ -72,11 +80,21 @@ def prefix_spaces_for_transition():
 ##
 
 def get_space(id):
+    """Takes a space id as a string and returns an Assembla_Space object. Initially
+    Object data will be limited to the keys defined in Assembla_Space.__init__(). All
+    Other data can be lazy loaded."""
     space_dict = api_request("/v1/spaces/" + id )
     return Assembla_Space(**space_dict)
 
 
 def get_space_ids():
+    """ Initiate an HTTPS session with the burstmarketing portfolio site, mimic login 
+    using the username/password defined in config.ini (usually the build-user) and scrape
+    the /p/projects/ webpage for space ids.
+
+    NOTE: This function should ideally be reimplemented to use the new portfolio section
+    of assemblas api. See: http://api-doc.assembla.com/content/ref/portfolio_spaces_index.html
+    """
     s = requests.session()
 
     r = s.get("https://burstmarketing.assembla.com/p/home")
@@ -102,6 +120,13 @@ def get_space_ids():
 
 
 def get_users():
+    """ Initiate an HTTPS session with the burstmarketing portfolio site, mimic login 
+    using the username/password defined in config.ini (usually the build-user) and scrape
+    the /p/users/ webpage for user ids and names.
+
+    NOTE: This function should ideally be reimplemented to use the new portfolio section
+    of assemblas api. See: http://api-doc.assembla.com/content/ref/portfolio_users_index.html
+    """
     s = requests.session()
 
     r = s.get("https://burstmarketing.assembla.com/p/home")
