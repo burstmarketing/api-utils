@@ -4,30 +4,31 @@ import json
 
 class TrafficAPI():
     def __init__(self, username, api_token):
-    """Initialize a TrafficAPI object with username and api_token. username should 
-    be the same user name used to login to traffic live,  the api_token can be 
-    generated through the traffic live admin for the particular user. Usually this
-    will come out of the config.ini Eg:
-    
-    USER_NAME = config.get("TrafficLive", "username")
-    API_TOKEN = config.get("TrafficLive", "api_token")
-     
-    traffic = TrafficAPI(USER_NAME, API_TOKEN)
-    """
+        """Initialize a TrafficAPI object with username and api_token. username should 
+        be the same user name used to login to traffic live,  the api_token can be 
+        generated through the traffic live admin for the particular user. Usually this
+        will come out of the config.ini Eg:
+        
+        USER_NAME = config.get("TrafficLive", "username")
+        API_TOKEN = config.get("TrafficLive", "api_token")
+        
+        traffic = TrafficAPI(USER_NAME, API_TOKEN)
+        """
         self.username = username
         self.api_token = api_token
-
-        self.base_url = "https://production-sohnar.apigee.com/TrafficLiteServer/openapi/"
+        
+                        
+        self.base_url = "https://sohnar-prod.apigee.net/TrafficLiteServer/openapi/"
         self.headers = {"Accept" : "application/json"}
-
+        
         self.max_attempts = 10
-
+        
         # Store the last request made for later inspection/debugging
         self._last_request = None
-
+        
         # Store the last response from _get(), _put(), _post() etc
         self._last_response = None
-
+    
     def _get(self,resource, options={}):
         """ Make a GET call out to the Traffic API, resource is the uri of the API resource you wish to
         query. Options should be a key-value dict of url paramaters defined in the API documentation
