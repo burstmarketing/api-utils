@@ -17,3 +17,21 @@ api_token = TRAFFIC_API_TOKEN
 + API_SECRET :: Will be generated and available through the same process as the API_KEY
 + TRAFFIC_USERNAME :: Your traffic-live username
 + TRAFFIC_API_TOKEN :: Generated through the administration panel in traffic live for your user
+
+* Requirements
+#+NAME: pip-freeze
+#+BEGIN_SRC sh 
+source /usr/local/bin/virtualenvwrapper.sh
+workon apiutils && pip freeze
+#+END_SRC
+#+RESULTS: pip-freeze 
+| Pygments==1.6         |
+| beautifulsoup4==4.2.1 |
+| distribute==0.6.34    |
+| elpy==1.0.1           |
+| ipython==0.13.2       |
+| jedi==0.6.0           |
+| pudb==2013.3.4        |
+| requests==1.2.3       |
+| urwid==1.1.1          |
+| wsgiref==0.1.2        |

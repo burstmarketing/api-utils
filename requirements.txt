@@ -1,0 +1,10 @@
+Pygments==1.6        
+beautifulsoup4==4.2.1
+distribute==0.6.34   
+elpy==1.0.1          
+ipython==0.13.2      
+jedi==0.6.0          
+pudb==2013.3.4       
+requests==1.2.3      
+urwid==1.1.1         
+wsgiref==0.1.2       
